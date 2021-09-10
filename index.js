@@ -23,19 +23,20 @@ filename += ".txt";
 
 // creating new file
 
-app.get("/newFile", (request, response) => {
-  fs.writeFileSync(`./files/${filename}`, `${timestamp}`, (err) => {
+app.get("/newFile", async (request, response) => {
+  await fs.writeFileSync(`./files/${filename}`, `${timestamp}`, (err) => {
     console.log(err ? err : "Success!");
   });
+  console.log(filename);
   response.send(filename);
 });
 
 // listing all the files
 
 app.get("/listFiles", (request, response) => {
-  fs.readdir("./files/", (err, files) => {
+  fs.readdir("./files/", async (err, files) => {
     let list = [];
-    files.forEach((file) => {
+    await files.forEach((file) => {
       console.log(file);
       list.push(file);
     });
