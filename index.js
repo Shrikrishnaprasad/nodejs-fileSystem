@@ -46,7 +46,7 @@ app.get("/listFiles", (request, response) => {
       console.log(file);
       list.push(file);
     });
-    response.send(list.map((file) => `<h3>${file}</h3>`));
+    response.send(list);
   });
 });
 
