@@ -21,6 +21,12 @@ filename += ".txt";
 
 //console.log(filename);
 
+app.get("/", (request, response) => {
+  response.send(
+    "<h1>FileSystem with timestamp <br/> <br/>Create - /newFile,<br/> List - /listFiles</h1>"
+  );
+});
+
 // creating new file
 
 app.get("/newFile", async (request, response) => {
