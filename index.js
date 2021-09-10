@@ -27,7 +27,7 @@ app.get("/newFile", async (request, response) => {
   await fs.writeFileSync(`./files/${filename}`, `${timestamp}`, (err) => {
     console.log(err ? err : "Success!");
   });
-  console.log(filename);
+  //console.log(filename);
   response.send(filename);
 });
 
