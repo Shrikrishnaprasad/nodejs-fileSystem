@@ -13,13 +13,22 @@ app.use(cors());
 
 let timestamp = Date.now();
 
-let d = new Date();
+let date = new Date();
 let filename =
-  d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + "-";
-filename += d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds();
+  date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + "-";
+filename += date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
 filename += ".txt";
 
 //console.log(filename);
+// creating folder
+const createFolder = () => {
+  let dir = "./files";
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  return dir;
+};
+createFolder();
 
 app.get("/", (request, response) => {
   response.send(
@@ -33,7 +42,7 @@ app.get("/newFile", async (request, response) => {
   await fs.writeFileSync(`./files/${filename}`, `${timestamp}`, (err) => {
     console.log(err ? err : "Success!");
   });
-  // console.log(filename);
+  console.log(filename);
   response.send(filename);
 });
 
