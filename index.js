@@ -9,16 +9,6 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// creating time stamp
-
-let timestamp = Date.now();
-
-let date = new Date();
-let filename =
-  date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + "-";
-filename += date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
-filename += ".txt";
-
 //console.log(filename);
 // creating folder
 const createFolder = () => {
@@ -39,6 +29,21 @@ app.get("/", (request, response) => {
 // creating new file
 
 app.get("/newFile", async (request, response) => {
+  // creating time stamp
+
+  let timestamp = Date.now();
+
+  let date = new Date();
+  let filename =
+    date.getDate() +
+    "-" +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getFullYear() +
+    "-";
+  filename +=
+    date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
+  filename += ".txt";
   await fs.writeFileSync(`./files/${filename}`, `${timestamp}`, (err) => {
     console.log(err ? err : "Success!");
   });
